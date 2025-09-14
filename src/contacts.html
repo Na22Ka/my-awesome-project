@@ -7,12 +7,12 @@
         <title>Контакты - Название вашего сайта</title>
         <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
         <meta name="description" content="Здесь вы можете найти наши контакты">
-        <link rel="stylesheet" href="css/forms.css">
+        <link rel="stylesheet" href="css/styles.css">
     </head>
 
     <body>
-        <header>
-            <a href="/">Логотип или название сайта</a>
+        <header class="site-header">
+            <a href="index.html">Логотип или название сайта</a>
             <!-- Главное меню навигации -->
             <nav>
                 <ul>
@@ -31,23 +31,22 @@
 
         <main>
             <!-- Простые "хлебные крошки" -->
-            <nav aria-label="Хлебные крошки">
-                <a href="index.html">Главная</a>
-                →
+            <nav class="breadcrumbs" aria-label="Хлебные крошки">
+                <a href="index.html">Главная</a>→
                 <span>Контакты</span>
             </nav>
 
             <h1>Наши контакты</h1>
-            <section>
+            <section class="section">
                 <p>+7 (123) 456-78-90</p>
                 <p>+7 (559) 340-42-51</p>
                 <p>+7 (457) 930-48-67</p>
             </section>
             <!-- Кнопка открытия модалки -->
-            <button id="openDialog" type="button">Написать нам</button>
+            <button class="btn" id="openDialog" type="button">Написать нам</button>
             <!-- Модалка с формой -->
-            <dialog id="contactDialog" aria-labelledby="dialogTitle">
-                <h2 id="dialogTitle">Обратная связь</h2>
+            <dialog id="contactDialog" class="dialog" aria-labelledby="dialogTitle">
+                <h2 id="dialogTitle" >Обратная связь</h2>
                 <form id="contactForm" method="dialog" novalidate="novalidate">
                     <label for="name">Имя</label>
                     <input
@@ -89,12 +88,12 @@
                     <div class="form-actions">
                         <button type="button" id="closeDialog">Закрыть</button>
                         <button type="submit">Отправить</button>
-                    </main>
+        </main>
 
-                    <footer>
-                        <p>&copy; 2023 Название вашего сайта. Все права защищены.</p>
-                        <p>Телефон: +7 (123) 456-78-90</p>
-                    </footer>
-                    <script src="js/forms.js"></script>
-                </body>
-            </html>
+        <footer class="site-footer">
+            <p>&copy; 2023 Название вашего сайта. Все права защищены.</p>
+            <p>Телефон: +7 (123) 456-78-90</p>
+        </footer>
+        <script src="js/forms.js"></script>
+    </body>
+</html>
