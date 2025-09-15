@@ -1,40 +1,58 @@
-// Переключение темы
-        const themeToggle = document.querySelector('.theme-toggle');
-        const themeIcon = document.querySelector('.theme-icon');
-        
-        // Проверяем сохраненную тему
-        if (localStorage.getItem('theme') === 'dark') {
-            document.documentElement.setAttribute('data-theme', 'dark');
-            themeIcon.innerHTML = '<path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z"/>';
+const dlg = document.getElementById('contactDialog');
+const openBtn = document.getElementById('openDialog');
+const closeBtn = document.getElementById('closeDialog');
+const form = document.getElementById('contactForm');
+let lastActive = null;
+openBtn.addEventListener('click', () => {
+    lastActive = document.activeElement;
+    dlg.showModal(); // модальный режим + затемнение
+    dlg.querySelector('input,select,textarea,button')?.focus();
+});
+closeBtn.addEventListener('click', () => dlg.close('cancel'));
+form?.addEventListener('submit', (e) => {
+    // валидация см. 1.4.2; при успехе закрываем окно
+});
+dlg.addEventListener('close', () => { lastActive?.focus(); });
+// Esc по умолчанию вызывает событие 'cancel' и закрывает <dialog>
+
+form?.addEventListener('submit', (e) => {
+    // 1) Сброс кастомных сообщений
+    [...form.elements].forEach(el => el.setCustomValidity?.(''));
+    // 2) Проверка встроенных ограничений
+    if (!form.checkValidity()) {
+        e.preventDefault();
+        // Пример: таргетированное сообщение
+        const email = form.elements.email;
+        if (email?.validity.typeMismatch) {
+            email.setCustomValidity('Введите корректный e-mail, напримерname@example.com');
         }
-        
-        themeToggle.addEventListener('click', () => {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            
-            if (currentTheme === 'dark') {
-                document.documentElement.removeAttribute('data-theme');
-                themeIcon.innerHTML = '<path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"/>';
-                localStorage.setItem('theme', 'light');
-            } else {
-                document.documentElement.setAttribute('data-theme', 'dark');
-                themeIcon.innerHTML = '<path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z"/>';
-                localStorage.setItem('theme', 'dark');
-            }
+        form.reportValidity(); // показать браузерные подсказки
+        // A11y: подсветка проблемных полей
+        [...form.elements].forEach(el => {
+            if (el.willValidate) el.toggleAttribute('aria-invalid',
+                !el.checkValidity());
         });
-        
-        // Мобильное меню
-        const menuToggle = document.querySelector('.menu-toggle');
-        const nav = document.querySelector('nav');
-        
-        menuToggle.addEventListener('click', () => {
-            nav.classList.toggle('active');
-            menuToggle.classList.toggle('active');
-        });
-        
-        // Закрытие меню при клике на ссылку
-        document.querySelectorAll('nav a').forEach(link => {
-            link.addEventListener('click', () => {
-                nav.classList.remove('active');
-                menuToggle.classList.remove('active');
-            });
-        });
+        return;
+    }
+    // 3) Успешная «отправка» (без сервера)
+    e.preventDefault();
+    // Если форма внутри <dialog>, закрываем окно:
+    document.getElementById('contactDialog')?.close('success');
+    form.reset();
+});
+
+const phone = document.getElementById('phone');
+phone?.addEventListener('input', () => {
+    const digits = phone.value.replace(/\D/g, '').slice(0, 11); // до 11 цифр
+    const d = digits.replace(/^8/, '7');
+    const parts = [];
+    if (d.length > 0) parts.push('+7');
+    if (d.length > 1) parts.push(' (' + d.slice(1, 4));
+    if (d.length >= 4) parts[parts.length - 1] += ')';
+    if (d.length >= 5) parts.push(' ' + d.slice(4, 7));
+    if (d.length >= 8) parts.push('-' + d.slice(7, 9));
+    if (d.length >= 10) parts.push('-' + d.slice(9, 11));
+    phone.value = parts.join('');
+});
+// Строгая проверка (если задаёте pattern из JS):
+phone?.setAttribute('pattern', '^\\+7 \\(\\d{3}\\) \\d{3}-\\d{2}-\\d{2}$');
