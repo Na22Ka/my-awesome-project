@@ -7,47 +7,52 @@
         <title>Контакты - Название вашего сайта</title>
         <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
         <meta name="description" content="Здесь вы можете найти наши контакты">
-        <link rel="stylesheet" href="css/forms.css">
+        <link rel="stylesheet" href="css/styles.css">
     </head>
 
     <body>
-        <header>
-            <a href="/">Логотип или название сайта</a>
-            <!-- Главное меню навигации -->
-            <nav>
-                <ul>
-                    <li>
-                        <a href="index.html">Главная</a>
-                    </li>
-                    <li>
-                        <a href="about.html">О нас</a>
-                    </li>
-                    <li>
-                        <a href="contacts.html">Контакты</a>
-                    </li>
-                </ul>
-            </nav>
-        </header>
+        <header class="site-header">
+        <a href="index.html" class="logo">Логотип</a>
+        
+        <button class="menu-toggle" aria-label="Открыть меню">
+            <span class="hamburger"></span>
+        </button>
+        
+        <nav>
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="about.html">О нас</a></li>
+                <li><a href="contacts.html">Контакты</a></li>
+            </ul>
+        </nav>
+        
+        <div class="theme-switcher">
+            <button class="theme-toggle" aria-label="Переключить тему">
+                <svg class="theme-icon" viewBox="0 0 24 24">
+                    <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"/>
+                </svg>
+            </button>
+        </div>
+    </header>
 
         <main>
             <!-- Простые "хлебные крошки" -->
-            <nav aria-label="Хлебные крошки">
-                <a href="index.html">Главная</a>
-                →
+            <nav class="breadcrumbs" aria-label="Хлебные крошки">
+                <a href="index.html">Главная</a>→
                 <span>Контакты</span>
             </nav>
 
             <h1>Наши контакты</h1>
-            <section>
+            <section class="section">
                 <p>+7 (123) 456-78-90</p>
                 <p>+7 (559) 340-42-51</p>
                 <p>+7 (457) 930-48-67</p>
             </section>
             <!-- Кнопка открытия модалки -->
-            <button id="openDialog" type="button">Написать нам</button>
+            <button class="btn" id="openDialog" type="button">Написать нам</button>
             <!-- Модалка с формой -->
-            <dialog id="contactDialog" aria-labelledby="dialogTitle">
-                <h2 id="dialogTitle">Обратная связь</h2>
+            <dialog id="contactDialog" class="dialog" aria-labelledby="dialogTitle">
+                <h2 id="dialogTitle" >Обратная связь</h2>
                 <form id="contactForm" method="dialog" novalidate="novalidate">
                     <label for="name">Имя</label>
                     <input
@@ -89,12 +94,13 @@
                     <div class="form-actions">
                         <button type="button" id="closeDialog">Закрыть</button>
                         <button type="submit">Отправить</button>
-                    </main>
+        </main>
 
-                    <footer>
-                        <p>&copy; 2023 Название вашего сайта. Все права защищены.</p>
-                        <p>Телефон: +7 (123) 456-78-90</p>
-                    </footer>
-                    <script src="js/forms.js"></script>
-                </body>
-            </html>
+        <footer class="site-footer">
+            <p>&copy; 2023 Название вашего сайта. Все права защищены.</p>
+            <p>Телефон: +7 (123) 456-78-90</p>
+        </footer>
+        <script src="js/forms.js"></script>
+        <script src="js/main.js"></script>
+    </body>
+</html>
