@@ -11,8 +11,12 @@
 <body>
     <!-- Шапка сайта -->
     <header class="site-header">
-        <a href="index.html">Логотип или название сайта</a>
-        <!-- Главное меню навигации -->
+        <a href="index.html" class="logo">Логотип</a>
+        
+        <button class="menu-toggle" aria-label="Открыть меню">
+            <span class="hamburger"></span>
+        </button>
+        
         <nav>
             <ul>
                 <li><a href="index.html">Главная</a></li>
@@ -20,6 +24,14 @@
                 <li><a href="contacts.html">Контакты</a></li>
             </ul>
         </nav>
+        
+        <div class="theme-switcher">
+            <button class="theme-toggle" aria-label="Переключить тему">
+                <svg class="theme-icon" viewBox="0 0 24 24">
+                    <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"/>
+                </svg>
+            </button>
+        </div>
     </header>
 
     <!-- Уникальное основное содержимое страницы -->
@@ -52,8 +64,9 @@
         <p>&copy; 2023 Название вашего сайта. Все права защищены.</p>
         <p>Телефон: +7 (123) 456-78-90</p>
     </footer>
-    <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Переключить тему">
-  🌓
 </button>
+
+    <script src="js/forms.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
